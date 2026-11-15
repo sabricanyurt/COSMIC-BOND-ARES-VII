@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "author": "COSMIC BOND — EVA-CUFF Phase 11 Hardware-in-the-Loop Twin (ESP32 + ILI9341 + NeoPixel 16 + MPU6050 + Joystick + VOX)",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 40,
+      "left": -120,
+      "attrs": {
+        "flashSize": "4"
+      }
+    },
+    {
+      "type": "wokwi-ili9341",
+      "id": "tft",
+      "top": -110,
+      "left": 180,
+      "attrs": {
+        "label": "EVA-CUFF ILI9341 J.A.R.V.I.S. G35 HUD"
+      }
+    },
+    {
+      "type": "wokwi-neopixel-ring",
+      "id": "neopixel_ring",
+      "top": -330,
+      "left": 215,
+      "attrs": {
+        "pixels": "16",
+        "label": "16-LED Compass & HWI Status Ring (GPIO 26)"
+      }
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "mpu6050",
+      "top": -120,
+      "left": -340,
+      "attrs": {
+        "label": "MPU6050 6-Axis Suit IMU (SDA=21 SCL=22)"
+      }
+    },
+    {
+      "type": "wokwi-analog-joystick",
+      "id": "joystick",
+      "top": 250,
+      "left": 180,
+      "attrs": {
+        "label": "KY-023 Traverse Joystick (HORZ=34 VERT=35 SEL=32)"
+      }
+    },
+    {
+      "type": "wokwi-microphone",
+      "id": "microphone",
+      "top": 270,
+      "left": -320,
+      "attrs": {
+        "label": "VOX Command Microphone (OUT=33)"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_ack",
+      "top": 280,
+      "left": -140,
+      "attrs": {
+        "color": "green",
+        "label": "ACK (GPIO 14)"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_next",
+      "top": 280,
+      "left": -50,
+      "attrs": {
+        "color": "blue",
+        "label": "PAGE (GPIO 27)"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_defilade",
+      "top": 350,
+      "left": -50,
+      "attrs": {
+        "color": "yellow",
+        "label": "DEFILADE (GPIO 25)"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_emg",
+      "top": 280,
+      "left": 40,
+      "attrs": {
+        "color": "red",
+        "label": "ABORT (GPIO 12)"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_nom",
+      "top": -40,
+      "left": 60,
+      "attrs": {
+        "color": "green",
+        "label": "NOMINAL"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_caut",
+      "top": -40,
+      "left": 95,
+      "attrs": {
+        "color": "yellow",
+        "label": "CAUTION"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_crit",
+      "top": -40,
+      "left": 130,
+      "attrs": {
+        "color": "red",
+        "label": "ALERT"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer",
+      "top": 80,
+      "left": 45,
+      "attrs": {
+        "volume": "0.5"
+      }
+    }
+  ],
+  "connections": [
+    [ "tft:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "tft:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "tft:CS", "esp:5", "cyan", [ "v0" ] ],
+    [ "tft:RESET", "esp:4", "orange", [ "v0" ] ],
+    [ "tft:D/C", "esp:2", "yellow", [ "v0" ] ],
+    [ "tft:MOSI", "esp:23", "blue", [ "v0" ] ],
+    [ "tft:SCK", "esp:18", "green", [ "v0" ] ],
+    [ "tft:MISO", "esp:19", "purple", [ "v0" ] ],
+    [ "tft:LED", "esp:3V3", "red", [ "v0" ] ],
+
+    [ "neopixel_ring:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "neopixel_ring:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "neopixel_ring:DIN", "esp:26", "cyan", [ "v0" ] ],
+
+    [ "mpu6050:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "mpu6050:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "mpu6050:SDA", "esp:21", "green", [ "v0" ] ],
+    [ "mpu6050:SCL", "esp:22", "yellow", [ "v0" ] ],
+
+    [ "joystick:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "joystick:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "joystick:HORZ", "esp:34", "orange", [ "v0" ] ],
+    [ "joystick:VERT", "esp:35", "purple", [ "v0" ] ],
+    [ "joystick:SEL", "esp:32", "cyan", [ "v0" ] ],
+
+    [ "microphone:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "microphone:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "microphone:OUT", "esp:33", "magenta", [ "v0" ] ],
+
+    [ "btn_ack:1.l", "esp:14", "green", [ "v0" ] ],
+    [ "btn_ack:2.r", "esp:GND.2", "black", [ "v0" ] ],
+    [ "btn_next:1.l", "esp:27", "blue", [ "v0" ] ],
+    [ "btn_next:2.r", "esp:GND.2", "black", [ "v0" ] ],
+    [ "btn_defilade:1.l", "esp:25", "yellow", [ "v0" ] ],
+    [ "btn_defilade:2.r", "esp:GND.2", "black", [ "v0" ] ],
+    [ "btn_emg:1.l", "esp:12", "red", [ "v0" ] ],
+    [ "btn_emg:2.r", "esp:GND.2", "black", [ "v0" ] ],
+
+    [ "led_nom:A", "esp:16", "green", [ "v0" ] ],
+    [ "led_nom:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "led_caut:A", "esp:17", "yellow", [ "v0" ] ],
+    [ "led_caut:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "led_crit:A", "esp:15", "red", [ "v0" ] ],
+    [ "led_crit:C", "esp:GND.1", "black", [ "v0" ] ],
+
+    [ "buzzer:1", "esp:13", "red", [ "v0" ] ],
+    [ "buzzer:2", "esp:GND.1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
